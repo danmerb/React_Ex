@@ -98,11 +98,7 @@ const initState = {
 						</div>
 						<button className="btn btn-primary" type="submit">Sign up</button>
 					</form>
-					{this.state.errorFlag && 
-						<div className="alert alert-dismissible alert-danger">
-	  						<strong>Oh snap!</strong> Hubo un error en el registro de usuario.
-						</div>
-					}
+					
 				</div>
 			</div>
 		);

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Post from './Post'
+import Form from './Form'
 
 class ReactFeed extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class ReactFeed extends Component {
   likeHandler = index => {
     let postsAux = [...this.state.posts];
 
-	postsAux[index].likes += 1;
+	//postsAux[index].likes += 1;
 	
 	const config = {
 		method: "PUT",
@@ -25,7 +26,7 @@ class ReactFeed extends Component {
 		body: JSON.stringify(postsAux[index])
 	}
 
-	fetch('https://reactcourseapi.herokuapp.com/post/', config)
+	fetch('https://reactcourseapi.herokuapp.com/post/like', config)
 		.then(res => {this.fetchData()})
 		
   }
@@ -59,7 +60,7 @@ class ReactFeed extends Component {
       return (<Post
         key = {index}
         name = {post.user}
-		likes = {post.likes}
+		    likes = {post.likes}
         title = {post.title}
         text = {post.text}
         image = {post.image}
@@ -70,9 +71,11 @@ class ReactFeed extends Component {
   
     return (
       <div className = "container">
+        
         <h1 className="display-3">ReactFeed</h1>
         <h2>Recent posts</h2>
-  
+        <div className = "container"> 
+          <Form/></div>  
         <div className="posts">
           {postsComponents}
         </div>
