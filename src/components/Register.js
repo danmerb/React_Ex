@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
+import { botones} from '../App.css';
+
+
 
 const initState = {
 	username: "",
@@ -63,6 +67,8 @@ const initState = {
 
 	render(){
 		return (
+			<>
+			<Helmet><title>Register</title></Helmet>
 			<div className="full-centered">
 				<div className = "jumbotron">
 					<h1 className="display-3">Registro</h1>
@@ -96,11 +102,16 @@ const initState = {
 									value = {this.state.password}/>
 							</label>
 						</div>
+						<div className={botones}>
 						<button className="btn btn-primary" type="submit">Sign up</button>
+						<Link to = "/login"> <button className="btn btn-primary" >Login</button></Link>
+						</div>
+						
 					</form>
 					
 				</div>
 			</div>
+			</>
 		);
 	}
 }

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Post from './Post'
 import Form from './Form'
+import {withRouter, Link} from 'react-router-dom';
+import Helmet from 'react-helmet';
+import Nav from './Nav'
 
 class ReactFeed extends Component {
   constructor(props){
@@ -49,14 +52,40 @@ class ReactFeed extends Component {
 
 		})
   }
+  
+  logout(){
+    localStorage.removeItem('token')
+    }
 
+    fetchUsername = () => {
+      let config = {
+        method: "GET",
+        headers: {
+          'Content-type': 'Application/json',
+          authorization: `Bearer ${this.state.token}`
+        }
+      }
+    
+      fetch('https://reactcourseapi.herokuapp.com/user/name', config)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            username: data.username || ''
+          })
+    
+        })
+      }
+
+      
   componentDidMount(){
-	this.fetchData();
-  }
+    this.fetchData();
+    this.fetchUsername();
+    }
   
   render(){
     const postsComponents = this.state.posts.map((post, index) => {
-		
+	
+
       return (<Post
         key = {index}
         name = {post.user}
@@ -70,6 +99,9 @@ class ReactFeed extends Component {
     });
   
     return (
+      <>
+      <Helmet><title>Posts</title></Helmet>      
+      <Nav username = {this.state.username}  />
       <div className = "container">
         
         <h1 className="display-3">ReactFeed</h1>
@@ -80,8 +112,9 @@ class ReactFeed extends Component {
           {postsComponents}
         </div>
       </div>
+      </>
     );
   }
 }
 
-export default ReactFeed;
+export default withRouter(ReactFeed);

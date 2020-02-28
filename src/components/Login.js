@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {withRouter} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 
 const initState = {
 	username: "",
@@ -84,7 +84,11 @@ const initState = {
 									value = {this.state.password}/>
 							</label>
 						</div>
-						<button className="btn btn-primary" type="submit">Sign in</button>
+						<div>
+							<button className="btn btn-primary" type="submit">Sign in</button>
+							<Link to = "/Register"> <button className="btn btn-primary">Register</button></Link>
+						</div>
+						
 					</form>
 					{this.state.errorFlag && 
 						<div className="alert alert-dismissible alert-danger">
@@ -92,6 +96,7 @@ const initState = {
 						</div>
 					}
 				</div>
+				
 			</div>
 		);
 	}
